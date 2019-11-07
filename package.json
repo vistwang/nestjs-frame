@@ -19,8 +19,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^5.4.0",
-    "@nestjs/core": "^5.4.0",
+    "@nestjs/platform-express": "^6.9.0",
     "@types/mongoose": "^5.5.29",
     "mongoose": "^5.7.8",
     "reflect-metadata": "^0.1.12",
