@@ -44,3 +44,7 @@ typings
 # System Files
 .DS_Store
 Thumbs.db
+
+# dotenv environment variables file 环境变量
+*.env
+.env
