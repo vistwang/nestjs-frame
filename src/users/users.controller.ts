@@ -1,21 +1,20 @@
-import { Controller, Get, Header } from '@nestjs/common';
+import { Body, Controller, Get, Header, Param, Post, Put } from '@nestjs/common';
+
+import { UserArray, UserInterface } from './users.interface';
+import { UsersService } from './users.service';
 
 export interface User {
     readonly id: number;
     readonly name: string;
     readonly age: number;
 }
-export interface Response{
-    success: boolean;
-    code: string;
-    msg: string;
-    data: any;
-}
+
 @Controller('users')
 export class UsersController {
+    constructor(private readonly usersService: UsersService){}
     @Get()
     @Header('Access-Control-Allow-Origin', '*')
-    async findAll(): Promise<Response> {
+    async findAll(): Promise<UserInterface> {
         /** 是否成功 */
     // private boolean success;
     // /**返回码*/
@@ -24,27 +23,28 @@ export class UsersController {
     // private String msg;
     // /**返回数据*/
     // private Object data;
+        return {
+            success: true,
+            code: 'X1000000',
+            msg: '请求user数据',
+            data: this.usersService.findAll(),
+        };
+    }
 
-    return {
-        success: true,
-        code: 'X1000000',
-        msg: '请求user数据',
-        data: [
-            {
-                id: 1,
-                name: '小明',
-                age: 18,
-            },
-            {
-                id: 2,
-                name: '小花',
-                age: 18,
-            },
-            {
-                id: 3,
-                name: '小王',
-                age: 18,
-            },
-        ]};
+    @Post()
+    async create(@Body() createUser: UserArray){
+        this.usersService.create(createUser);
+        return {
+            success: true,
+            code: 'X1000000',
+            msg: '编辑user数据',
+            data: createUser,
+        };
+    }
+
+    @Get(':id')
+    @Header('Access-Control-Allow-Origin', '*')
+    findOne(@Param() params): string {
+        return `This action returns a #${params.id} cat`;
     }
 }
