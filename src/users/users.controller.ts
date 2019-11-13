@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Header, Param, Post, Put } from '@nestjs/common';
-import { ApiUseTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Header, Logger, Param, Post, Put } from '@nestjs/common';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 
-import { UserArray, UserInterface } from './users.interface';
+import { UserInfoInterface, UserInterface } from './users.interface';
 import { UsersService } from './users.service';
 
 export interface User {
@@ -14,17 +14,13 @@ export interface User {
 @ApiUseTags('用户相关api')
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
+    private readonly logger = new Logger(UsersController.name);
     @Get()
+    @ApiOperation({title: '获取所有用户'})
     @Header('Access-Control-Allow-Origin', '*')
     async findAll(): Promise<UserInterface> {
-        /** 是否成功 */
-    // private boolean success;
-    // /**返回码*/
-    // private String code;
-    // /**返回信息*/
-    // private String msg;
-    // /**返回数据*/
-    // private Object data;
+        // 日志打印 log/warn/error
+        this.logger.log('获取所有用户');
         return {
             success: true,
             code: 'X1000000',
@@ -33,18 +29,22 @@ export class UsersController {
         };
     }
 
-    @Post()
-    async create(@Body() createUser: UserArray){
+    @Post('add')
+    @ApiOperation({title: '添加用户'})
+    @Header('Access-Control-Allow-Origin', '*')
+    async create(@Body() createUser: UserInfoInterface): Promise<UserInterface>{
         this.usersService.create(createUser);
+        this.logger.log(1111111);
         return {
             success: true,
-            code: 'X1000000',
+            code: 'X1000001',
             msg: '编辑user数据',
             data: createUser,
         };
     }
 
     @Get(':id')
+    @ApiOperation({title: '获取某个用户'})
     @Header('Access-Control-Allow-Origin', '*')
     findOne(@Param() params): string {
         return `This action returns a #${params.id} cat`;

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserArray } from './users.interface';
+import { UserInfoInterface } from './users.interface';
 
 @Injectable()
 export class UsersService {
-    private readonly users: UserArray[] = [
+    private readonly users: UserInfoInterface[] = [
         {
             id: 1,
             name: '小明',
@@ -22,11 +22,11 @@ export class UsersService {
         },
     ];
 
-    create(cat: UserArray) {
+    create(cat: UserInfoInterface) {
         this.users.push(cat);
     }
 
-    findAll(): UserArray[] {
+    findAll(): UserInfoInterface[] {
         return this.users;
     }
 }

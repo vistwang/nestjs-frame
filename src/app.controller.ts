@@ -9,7 +9,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @ApiOperation({title: '首页'})
+  @ApiOperation({
+      title: '首页',
+    })
   root(): string {
     return this.appService.root();
   }
