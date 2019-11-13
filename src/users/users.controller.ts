@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Header, Param, Post, Put } from '@nestjs/common';
+import { ApiUseTags } from '@nestjs/swagger';
 
 import { UserArray, UserInterface } from './users.interface';
 import { UsersService } from './users.service';
@@ -10,6 +11,7 @@ export interface User {
 }
 
 @Controller('users')
+@ApiUseTags('用户相关api')
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
     @Get()
