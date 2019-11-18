@@ -1,3 +1,5 @@
+import { Document } from 'mongoose';
+
 /** 是否成功 */
 // private boolean success;
 // /**返回码*/
@@ -14,7 +16,13 @@ export interface UserInterface{
 }
 
 export interface UserInfoInterface{
-    id: string | number;
+    id: string;
+    name: string;
+    age: number;
+}
+
+export interface User extends Document{
+    id: string;
     name: string;
     age: number;
 }

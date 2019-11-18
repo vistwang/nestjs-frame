@@ -15,6 +15,7 @@ export interface User {
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
     private readonly logger = new Logger(UsersController.name);
+
     @Get()
     @ApiOperation({title: '获取所有用户'})
     @Header('Access-Control-Allow-Origin', '*')
@@ -34,7 +35,7 @@ export class UsersController {
     @Header('Access-Control-Allow-Origin', '*')
     async create(@Body() createUser: UserInfoInterface): Promise<UserInterface>{
         this.usersService.create(createUser);
-        this.logger.log(1111111);
+        this.logger.log('创新新的用户');
         return {
             success: true,
             code: 'X1000001',
