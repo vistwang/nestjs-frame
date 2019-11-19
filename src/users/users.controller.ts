@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, Header, Logger, Param, Post, Put } from '@nestjs/common';
+import {
+    Body, Controller, Delete, Get, Header, Logger, Param, Patch, Post, Put, Query
+} from '@nestjs/common';
 import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 
 import { UserInfoInterface, UserInterface } from './users.interface';
@@ -16,17 +18,48 @@ export class UsersController {
     constructor(private readonly usersService: UsersService){}
     private readonly logger = new Logger(UsersController.name);
 
+    @Get(':id')
+    @ApiOperation({title: '通过id获取某个用户信息'})
+    @Header('Access-Control-Allow-Origin', '*')
+    findById(@Param() params): Promise<UserInterface> {
+        return this.usersService.find({id: params.id}).then((sdata) => {
+            return {
+                success: true,
+                code: 'X1000000',
+                msg: 'id请求user数据',
+                data: sdata,
+            };
+        });
+    }
+
     @Get()
     @ApiOperation({title: '获取所有用户'})
     @Header('Access-Control-Allow-Origin', '*')
     async findAll(): Promise<UserInterface> {
         // 日志打印 log/warn/error
         this.logger.log('获取所有用户');
+        return this.usersService.findAll().then((sdata) => {
+            return {
+                success: true,
+                code: 'X1000000',
+                msg: '请求user数据',
+                data: sdata,
+            };
+        });
+
+    }
+
+    @Patch() // 部分更新
+    @ApiOperation({title: '更新部分用户'})
+    @Header('Access-Control-Allow-Origin', '*')
+    async upDate(): Promise<UserInterface> {
+        // 日志打印 log/warn/error
+        this.logger.log('更新部分用户');
         return {
             success: true,
             code: 'X1000000',
-            msg: '请求user数据',
-            data: this.usersService.findAll(),
+            msg: '更新部分用户',
+            data: [],
         };
     }
 
@@ -44,11 +77,18 @@ export class UsersController {
         };
     }
 
-    @Get(':id')
-    @ApiOperation({title: '获取某个用户'})
+    @Get('')
+    @ApiOperation({title: '关键字获取某个用户信息'})
     @Header('Access-Control-Allow-Origin', '*')
-    findOne(@Param() params): string {
-        return `This action returns a #${params.id} cat`;
+    findByKey(@Query() query): Promise<UserInterface> {
+        return this.usersService.find({name: /query.key/}).then((sdata) => {
+            return {
+                success: true,
+                code: 'X1000000',
+                msg: '关键字请求user数据',
+                data: sdata,
+            };
+        });
     }
 
     @Delete()
