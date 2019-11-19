@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { User, UserInfoInterface } from './users.interface';
@@ -8,6 +8,7 @@ import { User, UserInfoInterface } from './users.interface';
 @Injectable()
 export class UsersService {
     constructor(@InjectModel('User') private readonly userModel: Model<User>){}
+    private readonly logger = new Logger(UsersService.name);
     private readonly users: UserInfoInterface[] = [
         {
             id: '1',
@@ -38,6 +39,18 @@ export class UsersService {
 
         // 获取所有的
         return await this.userModel.find().exec();
+
         // return this.users;
+    }
+
+    async deleteData(na: string) {
+        this.userModel.deleteOne({name: na}, (err) => {
+            this.logger.log('删除某个用户');
+        });
+    }
+
+    async changeData(cid: string, data: UserInfoInterface) {
+        this.logger.log(JSON.stringify(data));
+        this.userModel.findOneAndUpdate({id: cid}, data);
     }
 }

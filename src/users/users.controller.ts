@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, Logger, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Header, Logger, Param, Post, Put } from '@nestjs/common';
 import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 
 import { UserInfoInterface, UserInterface } from './users.interface';
@@ -49,5 +49,33 @@ export class UsersController {
     @Header('Access-Control-Allow-Origin', '*')
     findOne(@Param() params): string {
         return `This action returns a #${params.id} cat`;
+    }
+
+    @Delete()
+    @ApiOperation({title: '删除某个用户'})
+    @Header('Access-Control-Allow-Origin', '*')
+    async deleteOne(): Promise<UserInterface> {
+        this.usersService.deleteData('测试2');
+        this.logger.log('删除某个用户');
+        return {
+            success: true,
+            code: 'X1000002',
+            msg: '删除user数据',
+            data: '删除成功',
+        };
+    }
+
+    @Put(':id')
+    @ApiOperation({title: '修改某个用户'})
+    @Header('Access-Control-Allow-Origin', '*')
+    async changeOne(@Param() params, @Body() newData: UserInfoInterface): Promise<UserInterface> {
+        this.usersService.changeData(params.id, newData);
+        this.logger.log('修改某个用户');
+        return {
+            success: true,
+            code: 'X1000002',
+            msg: '修改user数据',
+            data: '修改成功',
+        };
     }
 }
