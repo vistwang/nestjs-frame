@@ -1,8 +1,9 @@
 import {
-    Body, Controller, Delete, Get, Header, Logger, Param, Patch, Post, Put, Query
+    Body, Controller, Delete, Get, Header, Logger, Param, ParseIntPipe, Patch, Post, Put, Query
 } from '@nestjs/common';
 import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 
+import { UserIdPipe } from './pipes/user-id.pipe';
 import { UserInfoInterface, UserInterface } from './users.interface';
 import { UsersService } from './users.service';
 
@@ -108,8 +109,8 @@ export class UsersController {
     @Put(':id')
     @ApiOperation({title: '修改某个用户'})
     @Header('Access-Control-Allow-Origin', '*')
-    async changeOne(@Param() params, @Body() newData: UserInfoInterface): Promise<UserInterface> {
-        this.usersService.changeData(params.id, newData);
+    async changeOne(@Param('id', new UserIdPipe()) id, @Body() newData: UserInfoInterface): Promise<UserInterface> {
+        this.usersService.changeData(id, newData);
         this.logger.log('修改某个用户');
         return {
             success: true,
