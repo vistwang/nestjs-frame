@@ -9,7 +9,7 @@ import { User, UserInfoInterface } from './users.interface';
 export class UsersService {
     constructor(@InjectModel('User') private readonly userModel: Model<User>){}
     private readonly logger = new Logger(UsersService.name);
-    private static readonly users: UserInfoInterface[] = [
+    private readonly users: UserInfoInterface[] = [
         {
             id: '1',
             name: '小明',
