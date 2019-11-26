@@ -28,7 +28,7 @@ const options = {
         FeatureModule,
         SharedModule,
         UsersModule,
-        MongooseModule.forRoot('mongodb://localhost/nest', options),
+        MongooseModule.forRoot('mongodb://47.103.55.126:27017/fusion', options),
     ],
     controllers: [AppController],
     providers: [AppService],
