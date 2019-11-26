@@ -1,6 +1,8 @@
 import * as mongoose from 'mongoose';
 
-export const BlockSchema = new mongoose.Schema({
+export const BlockSchema = new mongoose.Schema(
+  {
+    _id: String,
     number: Number,
     hash: String,
     parentHash: String,
@@ -15,20 +17,11 @@ export const BlockSchema = new mongoose.Schema({
     blockTime: Number,
     txcount: Number,
     avgGasprice: String,
-    reward: String,
+    reward: Number,
     selectedTicket: String,
     retreatTickets: Array,
     retreatMiners: Array,
     ticketNumber: Number,
-
-    /* 支持以下八种
-    String      字符串
-    Number      数字
-    Date        日期
-    Buffer      二进制
-    Boolean     布尔值
-    Mixed       混合类型
-    ObjectId    对象ID
-    Array       数组 */
-
-});
+  },
+  { collection: 'Blocks', versionKey: false },
+);
