@@ -38,8 +38,8 @@ export class BlocksService implements IUserService {
     } = query;
     return await this.blockModel
       .find({}, { _id: 0 })
-      .skip((pageNum - 1) * pageSize)
       .sort({ timestamp: -1 })
+      .skip((pageNum - 1) * pageSize)
       .limit(pageSize)
       .catch(e => {
         this.logger.log(`\n e: ${JSON.stringify(e)}\n`);
