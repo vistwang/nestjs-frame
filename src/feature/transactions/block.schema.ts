@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 
 export const TransactionsSchema = new mongoose.Schema({
+    _id: String,
     nonce: Number,
     hash: String,
     blockHash: String,
@@ -36,4 +37,4 @@ export const TransactionsSchema = new mongoose.Schema({
     ObjectId    对象ID
     Array       数组 */
 
-});
+}, {collection: 'Transactions'});

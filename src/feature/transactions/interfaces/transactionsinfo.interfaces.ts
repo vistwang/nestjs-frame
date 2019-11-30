@@ -8,9 +8,9 @@ export interface TransactionsInfo {
     transactionIndex: number;
 }
 
-export interface TransactionsReturnInfo {
-    size: number;
-    page: number;
+export interface TransactionsReturnAPIInfo {
+    pageNum: number;
+    pageSize: number;
     success: true;
     code: string;
     msg: string;
@@ -18,6 +18,7 @@ export interface TransactionsReturnInfo {
 }
 
 export interface TransactionsDoc extends Document {
+    _id: string;
     nonce: number;
     hash: string;
     blockHash: string;

@@ -68,6 +68,7 @@ export class UsersController {
     @ApiOperation({title: '添加用户'})
     @Header('Access-Control-Allow-Origin', '*')
     async create(@Body() createUser: UserInfoInterface): Promise<UserInterface>{
+        // createUser 请求体中存储的数据
         this.usersService.create(createUser);
         this.logger.log('创新新的用户');
         return {
