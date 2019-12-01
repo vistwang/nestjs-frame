@@ -12,29 +12,18 @@ export class BlocksService implements IUserService {
     @InjectModel('Blocks') private readonly blockModel: Model<BlockInfoDoc>,
   ) {}
   private readonly logger = new Logger(BlocksService.name);
-  private infoField = {
-    _id: 0,
-    number: 1,
-    timestamp: 1,
-    txcount: 1,
-    gasUsed: 1,
-    gasLimit: 1,
-    miner: 1,
-  };
   async findOne(): Promise<BlockInfo[]> {
     /* 文档查询
             find()
             findById()
             findOne() */
     // 获取单个
-    return await this.blockModel.find({}, this.infoField).exec();
+    return await this.blockModel.find({}).exec();
   }
   async findAll(query: any): Promise<BlockInfo[]> {
     const {
-      pageNum = 1,
-      pageSize = 10,
-      goodsName = '',
-      goodsPrice = '',
+      pageNum = 800,
+      pageSize = 500,
     } = query;
     return await this.blockModel
       .find({}, { _id: 0 })

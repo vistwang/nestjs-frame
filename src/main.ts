@@ -21,6 +21,11 @@ async function bootstrap() {
 }
 bootstrap();
 
+// CoreModule 核心模块（注册中间件，过滤器，管道，守卫，拦截器，装饰器等）
+// SharedModule 共享模块（注册服务，mongodb，redis等）
+// ConfigModule 配置模块（系统配置）
+// FeatureModule 特性模块（业务模块，如用户模块，产品模块等
+
 // generate(简写：g) 生成文件
 // class (简写: cl) 类
 // controller (简写: co) 控制器

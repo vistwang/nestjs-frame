@@ -60,10 +60,10 @@
     express "4.17.1"
     multer "1.4.2"
 
-"@nestjs/platform-socket.io@^6.9.0":
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-socket.io/-/platform-socket.io-6.9.0.tgz#c390029cee44c11557fa4509515d40d8ed7858f3"
-  integrity sha512-nFaJjS4N9a8EfvCbAkeLWxTOaubUxLAS5KHUHPXJz+iWC6HWMLsIqIQcu6C6HuwpzNJz0Ve7PHLr4P9eUvyNwg==
+"@nestjs/platform-socket.io@^6.10.4":
+  version "6.10.4"
+  resolved "https://registry.npm.taobao.org/@nestjs/platform-socket.io/download/@nestjs/platform-socket.io-6.10.4.tgz#a4c54761cbf110434b1aea1de99b33ca83bd7b67"
+  integrity sha1-pMVHYcvxEENLGuod6ZszyoO9e2c=
   dependencies:
     socket.io "2.3.0"
 
@@ -83,10 +83,10 @@
     deprecate "1.0.0"
     optional "0.1.4"
 
-"@nestjs/websockets@^6.9.0":
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/websockets/-/websockets-6.9.0.tgz#9ad17a34e3a3405ba4fbda49ab7e118c90ce2c44"
-  integrity sha512-6dsB4V2ovdDFSF80wTDb6C28KJ6gNpbag0q/e4rReFc+uIOPvm1PVFQt6Q2g/0OZfhnwVXjBGRNgtCF0pXDZCQ==
+"@nestjs/websockets@^6.10.4":
+  version "6.10.4"
+  resolved "https://registry.npm.taobao.org/@nestjs/websockets/download/@nestjs/websockets-6.10.4.tgz#3f9ee236497e9bae9dbee828f8b1e3aca231a403"
+  integrity sha1-P57iNkl+m66dvugo+LHjrKIxpAM=
   dependencies:
     iterare "1.2.0"
 
@@ -200,8 +200,8 @@
 
 "@types/socket.io@^2.1.4":
   version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@types/socket.io/-/socket.io-2.1.4.tgz#674e7bc193c5ccdadd4433f79f3660d31759e9ac"
-  integrity sha512-cI98INy7tYnweTsUlp8ocveVdAxENUThO0JsLSCs51cjOP2yV5Mqo5QszMDPckyRRA+PO6+wBgKvGvHUCc23TQ==
+  resolved "https://registry.npm.taobao.org/@types/socket.io/download/@types/socket.io-2.1.4.tgz#674e7bc193c5ccdadd4433f79f3660d31759e9ac"
+  integrity sha1-Z057wZPFzNrdRDP3nzZg0xdZ6aw=
   dependencies:
     "@types/node" "*"
 

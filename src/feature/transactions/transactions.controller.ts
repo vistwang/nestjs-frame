@@ -13,14 +13,15 @@ export class TransactionsController {
     @Get()
     @ApiOperation({title: '获取Transactions列表'})
     @Header('Access-Control-Allow-Origin', '*')
-    async findAll(@Query() query): Promise<TransactionsReturnAPIInfo> {
+    async findByPage(@Query() query): Promise<TransactionsReturnAPIInfo> {
         // 日志打印 log/warn/error
         this.logger.log('获取Transactions列表');
-        const {pageNum = 1, pageSize = 10} = query;
+        const page = query.pageNum;
+        const size = query.pageSize;
         return this.transactionsService.findByPage(query).then((sdata) => {
             return {
-                pageSize: pageNum,
-                pageNum: pageSize,
+                pageSize: size,
+                pageNum: page,
                 success: true,
                 code: 'x000002',
                 msg: '获取Transactions列表',
