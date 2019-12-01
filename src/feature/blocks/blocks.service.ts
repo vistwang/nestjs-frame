@@ -22,8 +22,8 @@ export class BlocksService implements IUserService {
   }
   async findAll(query: any): Promise<BlockInfo[]> {
     const {
-      pageNum = 800,
-      pageSize = 500,
+      pageNum = 1,
+      pageSize = 20,
     } = query;
     return await this.blockModel
       .find({}, { _id: 0 })
