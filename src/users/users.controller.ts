@@ -1,11 +1,13 @@
 import {
-    Body, Controller, Delete, Get, Header, Logger, Param, ParseIntPipe, Patch, Post, Put, Query
+    Body, Controller, Delete, Get, Header, Logger, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 
 import { UserIdPipe } from './pipes/user-id.pipe';
 import { UserInfoInterface, UserInterface } from './users.interface';
 import { UsersService } from './users.service';
+import { IsNumberPipe } from './pipes/is-number.pipe';
+import { AuthGuard } from './guards/auth.guard';
 
 export interface User {
     readonly id: number;
@@ -15,15 +17,16 @@ export interface User {
 
 @Controller('users')
 @ApiUseTags('用户相关api')
+@UseGuards(AuthGuard)
+// @UserIdPipe(IsNumberPipe)
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
     private readonly logger = new Logger(UsersController.name);
 
     @Get(':id')
     @ApiOperation({title: '通过id获取某个用户信息'})
-    @Header('Access-Control-Allow-Origin', '*')
-    findById(@Param() params): Promise<UserInterface> {
-        return this.usersService.find({id: params.id}).then((sdata) => {
+    findById(@Param('id', UserIdPipe) uid): Promise<UserInterface> {
+        return this.usersService.find({id: uid}).then((sdata) => {
             return {
                 success: true,
                 code: 'X1000000',
@@ -35,7 +38,6 @@ export class UsersController {
 
     @Get()
     @ApiOperation({title: '获取所有用户'})
-    @Header('Access-Control-Allow-Origin', '*')
     async findAll(): Promise<UserInterface> {
         // 日志打印 log/warn/error
         this.logger.log('获取所有用户');
@@ -52,7 +54,6 @@ export class UsersController {
 
     @Patch() // 部分更新
     @ApiOperation({title: '更新部分用户'})
-    @Header('Access-Control-Allow-Origin', '*')
     async upDate(): Promise<UserInterface> {
         // 日志打印 log/warn/error
         this.logger.log('更新部分用户');
@@ -66,7 +67,6 @@ export class UsersController {
 
     @Post('add')
     @ApiOperation({title: '添加用户'})
-    @Header('Access-Control-Allow-Origin', '*')
     async create(@Body() createUser: UserInfoInterface): Promise<UserInterface>{
         // createUser 请求体中存储的数据
         this.usersService.create(createUser);
@@ -81,7 +81,6 @@ export class UsersController {
 
     @Get('')
     @ApiOperation({title: '关键字获取某个用户信息'})
-    @Header('Access-Control-Allow-Origin', '*')
     findByKey(@Query() query): Promise<UserInterface> {
         return this.usersService.find({name: /query.key/}).then((sdata) => {
             return {
@@ -95,7 +94,6 @@ export class UsersController {
 
     @Delete()
     @ApiOperation({title: '删除某个用户'})
-    @Header('Access-Control-Allow-Origin', '*')
     async deleteOne(): Promise<UserInterface> {
         this.usersService.deleteData('测试2');
         this.logger.log('删除某个用户');
@@ -109,7 +107,6 @@ export class UsersController {
 
     @Put(':id')
     @ApiOperation({title: '修改某个用户'})
-    @Header('Access-Control-Allow-Origin', '*')
     async changeOne(@Param('id', new UserIdPipe()) id, @Body() newData: UserInfoInterface): Promise<UserInterface> {
         this.usersService.changeData(id, newData);
         this.logger.log('修改某个用户');

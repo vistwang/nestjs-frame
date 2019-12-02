@@ -10,7 +10,6 @@ export class SyncinfoController {
 
     @Get()
     @ApiOperation({title: 'Syncinfo信息'})
-    @Header('Access-Control-Allow-Origin', '*')
     async findAll(): Promise<SyncinfoAPIInfo> {
         // 日志打印 log/warn/error
         this.logger.log('获取Syncinfo信息');

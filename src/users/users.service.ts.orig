@@ -46,11 +46,10 @@ export class UsersService {
         findById()
         findOne() */
         // 获取所有的
-        // return await this.userModel.find().exec().catch((error) => {
-        //     this.logger.log('get userinfo ' + JSON.stringify(error));
-        //     return [];
-        // });
-        return this.users;
+        return await this.userModel.find().exec().catch((error) => {
+            this.logger.log('get userinfo ' + JSON.stringify(error));
+            return [];
+        });
     }
 
     async find(conditions): Promise<UserInfoInterface[]> {

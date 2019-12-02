@@ -12,7 +12,6 @@ export class BlocksController {
 
     @Get()
     @ApiOperation({title: '获取block列表'})
-    @Header('Access-Control-Allow-Origin', '*')
     async findAll(@Query() query): Promise<BlockReturnInfo> {
         // 日志打印 log/warn/error
         this.logger.log('获取block列表');

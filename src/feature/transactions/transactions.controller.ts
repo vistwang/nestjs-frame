@@ -12,7 +12,6 @@ export class TransactionsController {
 
   @Get()
   @ApiOperation({ title: '获取Transactions列表' })
-  @Header('Access-Control-Allow-Origin', '*')
   async findByPage(@Query() query): Promise<TransactionsReturnAPIInfo> {
     // 日志打印 log/warn/error
     this.logger.log('获取Transactions列表');
