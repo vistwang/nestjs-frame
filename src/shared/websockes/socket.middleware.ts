@@ -1,10 +1,8 @@
-import { Injectable, NestMiddleware, MiddlewareFunction } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 @Injectable()
 export class SocketMiddleware implements NestMiddleware {
-    resolve(...args: any[]): MiddlewareFunction {
-        return (req, res, next) => {
-            //   console.log('Request...');
-            next();
-        };
+    use(req: any, res: any, next: () => void) {
+        next();
+        // throw new Error('Method not implemented.');
     }
 }
