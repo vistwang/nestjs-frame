@@ -57,7 +57,7 @@ export class UsersService {
 
     async deleteData(na: string) {
         this.userModel.deleteOne({name: na}, (err) => {
-            this.logger.log('删除某个用户');
+
         });
     }
 
