@@ -47,7 +47,7 @@ export class UsersService {
         findOne() */
         // 获取所有的
         return await this.userModel.find().exec().catch((error) => {
-            this.logger.log(JSON.stringify(error));
+            this.logger.log('get userinfo ' + JSON.stringify(error));
             return [];
         });
     }
