@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
     .setTitle('Blockchain browser API documentation')
@@ -17,6 +17,7 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, document);
 
   // tslint:disable-next-line:no-console
+  app.enableCors();
   await app.listen(3000, () => {
     // console.log('Application is listening on port 3000'),
   });
