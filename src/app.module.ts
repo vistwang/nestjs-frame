@@ -10,7 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './users/users.module';
 
 const options = {
-    // 该对象将传递给底层驱动程序。这里所包含的所有选项优先于连接字符串中传递的选项，参数如下
+  // 该对象将传递给底层驱动程序。这里所包含的所有选项优先于连接字符串中传递的选项，参数如下
 };
 
 //  db            -数据库设置
@@ -23,14 +23,15 @@ const options = {
 //  promiseLibrary
 
 @Module({
-    imports: [ConfigModule,
-        CoreModule,
-        FeatureModule,
-        SharedModule,
-        UsersModule,
-        MongooseModule.forRoot('mongodb://47.103.55.126:27017/fusion', options),
-    ],
-    controllers: [AppController],
-    providers: [AppService],
+  imports: [
+    ConfigModule,
+    CoreModule,
+    FeatureModule,
+    SharedModule,
+    UsersModule,
+    MongooseModule.forRoot('mongodb://47.103.55.126:27017/fusion', options),
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
