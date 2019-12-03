@@ -8,6 +8,7 @@ import { UserInfoInterface, UserInterface } from './users.interface';
 import { UsersService } from './users.service';
 import { IsNumberPipe } from './pipes/is-number.pipe';
 import { AuthGuard } from './guards/auth.guard';
+import { Roles } from './decorators/roles.decorator';
 
 export interface User {
     readonly id: number;
@@ -18,7 +19,6 @@ export interface User {
 @Controller('users')
 @ApiUseTags('用户相关api')
 @UseGuards(AuthGuard)
-@SetMetadata('fanshe', ['admin']) // 反射 守卫里面，可以得到设置的这些数据。
 // @UserIdPipe(IsNumberPipe)
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
@@ -39,6 +39,8 @@ export class UsersController {
 
     @Get()
     @ApiOperation({title: '获取所有用户'})
+    // @SetMetadata('roles', ['admin']) // 反射 守卫里面，可以得到设置的这些数据。 此处效果和下面自定义装饰器相同
+    @Roles('admin') // 自定义装饰器 他的执行实在管道之前的
     async findAll(): Promise<UserInterface> {
         // 日志打印 log/warn/error
         this.logger.log('获取所有用户');
