@@ -1,5 +1,5 @@
 import {
-    Body, Controller, Delete, Get, Header, Logger, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards,
+    Body, Controller, Delete, Get, Header, Logger, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards, SetMetadata,
 } from '@nestjs/common';
 import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 
@@ -18,6 +18,7 @@ export interface User {
 @Controller('users')
 @ApiUseTags('用户相关api')
 @UseGuards(AuthGuard)
+@SetMetadata('fanshe', ['admin']) // 反射 守卫里面，可以得到设置的这些数据。
 // @UserIdPipe(IsNumberPipe)
 export class UsersController {
     constructor(private readonly usersService: UsersService){}

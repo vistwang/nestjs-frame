@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Logger, Header } from '@nestjs/common';
 
-let num = 0;
+const num = 0;
 @WebSocketGateway()
 export class EventsGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -21,16 +21,22 @@ export class EventsGateway
   @SubscribeMessage('events')
   onEvent(client: any, payload: any): Observable<WsResponse<any>> | any {
     // client: socket 实例，payload: 从客户端那里得到的数据
+    this.logger.log(`获取来自客户端的数据> ${payload}`);
     const { name } = payload;
-    client.on('connent', () => {
-      num++;
-      this.logger.log(`有人链接了...> ${num}`);
-    });
-    client.on('disconnect', () => {
-      num--;
-      this.logger.log(`有人离开了...> ${num}`);
-    });
-    return of(payload);
+    // client.on('connent', () => {
+    //   num++;
+    //   this.logger.log(`有人链接了...> ${num}`);
+    // });
+    // client.on('disconnect', () => {
+    //   num--;
+    //   this.logger.log(`有人离开了...> ${num}`);
+    // });
+    return of('hello, 这是来自后端的数据');
+  }
+  @SubscribeMessage('connent')
+  onConnent(client: any, payload: any): Observable<WsResponse<any>> | any {
+    // client: socket 实例，payload: 从客户端那里得到的数据
+    this.logger.log(`客户端链接成功> ${payload}`);
   }
   @SubscribeMessage('new blocks')
   onBlocks(client: any, payload: any): Observable<WsResponse<any>> | any {
