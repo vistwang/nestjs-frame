@@ -1,5 +1,5 @@
 import {
-    Body, Controller, Delete, Get, Header, Logger, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards, SetMetadata,
+    Body, Controller, Delete, Get, Header, Logger, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards, SetMetadata, UseInterceptors,
 } from '@nestjs/common';
 import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 
@@ -9,6 +9,8 @@ import { UsersService } from './users.service';
 import { IsNumberPipe } from './pipes/is-number.pipe';
 import { AuthGuard } from './guards/auth.guard';
 import { Roles } from './decorators/roles.decorator';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { DemoPipe } from 'src/core/pipes/demo.pipe';
 
 export interface User {
     readonly id: number;
@@ -19,6 +21,7 @@ export interface User {
 @Controller('users')
 @ApiUseTags('用户相关api')
 @UseGuards(AuthGuard)
+// @UseInterceptors(LoggingInterceptor)
 // @UserIdPipe(IsNumberPipe)
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
@@ -26,7 +29,7 @@ export class UsersController {
 
     @Get(':id')
     @ApiOperation({title: '通过id获取某个用户信息'})
-    findById(@Param('id', UserIdPipe) uid): Promise<UserInterface> {
+    findById(@Param('id', UserIdPipe, DemoPipe) uid): Promise<UserInterface> {
         return this.usersService.find({id: uid}).then((sdata) => {
             return {
                 success: true,

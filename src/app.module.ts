@@ -8,6 +8,8 @@ import { CoreModule } from './core/core.module';
 import { FeatureModule } from './feature/feature.module';
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './users/users.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggingInterceptor } from './users/interceptors/logging.interceptor';
 
 const options = {
   // 该对象将传递给底层驱动程序。这里所包含的所有选项优先于连接字符串中传递的选项，参数如下
@@ -32,6 +34,14 @@ const options = {
     MongooseModule.forRoot('mongodb://47.103.55.126:27017/fusion', options),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+      AppService,
+
+      // 全局的拦截器
+      {
+          provide: APP_INTERCEPTOR,
+          useClass: LoggingInterceptor,
+      },
+],
 })
 export class AppModule {}
