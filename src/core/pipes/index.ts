@@ -1,0 +1,1 @@
+export { DemoPipe } from './demo.pipe';

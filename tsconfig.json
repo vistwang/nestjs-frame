@@ -11,7 +11,37 @@
     "target": "es6",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./"
+    "baseUrl": "./",
+
+    "paths": {
+        "@class": [
+            "src/core/class"
+        ],
+        "@core/*": [
+            "src/core/*"
+        ],
+        "@service": [
+            "src/core/service"
+        ],
+        "@service/*": [
+            "src/core/service/*"
+        ],
+        "@pipe": [
+            "src/core/pipes"
+        ],
+        "@pipe/*": [
+            "src/core/pipes/*"
+        ],
+        "@interceptor": [
+            "src/core/interceptors"
+        ],
+        "@interceptor/*": [
+            "src/core/interceptors/*"
+        ],
+        "@shared/*": [
+            "src/shared/*"
+        ],
+    }
   },
   "include": [
     "src/**/*"

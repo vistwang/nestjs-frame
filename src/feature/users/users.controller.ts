@@ -10,7 +10,7 @@ import { IsNumberPipe } from './pipes/is-number.pipe';
 import { AuthGuard } from './guards/auth.guard';
 import { Roles } from './decorators/roles.decorator';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
-import { DemoPipe } from 'src/core/pipes/demo.pipe';
+import { DemoPipe } from 'src/core/pipes';
 
 export interface User {
     readonly id: number;
