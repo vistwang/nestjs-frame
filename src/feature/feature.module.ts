@@ -5,10 +5,11 @@ import { SyncinfoModule } from './syncinfo/syncinfo.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { UsersModule } from './users/users.module';
 import { StakingModule } from './staking/staking.module';
+import { AssetsModule } from './assets_/assets.module';
 
 // 特性模块（主要业务模块）
 @Module({
-  imports: [UsersModule, BlocksModule, TransactionsModule, SyncinfoModule, StakingModule],
+  imports: [UsersModule, BlocksModule, TransactionsModule, SyncinfoModule, StakingModule, AssetsModule],
 })
 
 export class FeatureModule {}
