@@ -1,8 +1,8 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { EventsGateway } from './events.gateway';
+import { WebGateway } from './web.gateway';
 
 @Module({
-  providers: [EventsGateway],
+  providers: [WebGateway],
 })
 export class WebsockesModule implements NestModule {
   constructor() {}

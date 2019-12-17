@@ -2,6 +2,6 @@ import { Base } from './base';
 
 export class BaseService extends Base {
     constructor() {
-        super();
+        super(BaseService.name);
     }
 }
