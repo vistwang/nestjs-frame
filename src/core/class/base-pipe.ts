@@ -1,6 +1,6 @@
 import { Base } from './base';
 
-export class BasePipe extends Base {
+export abstract class BasePipe extends Base {
     constructor() {
         super(BasePipe.name);
     }

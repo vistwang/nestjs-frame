@@ -17,7 +17,8 @@ export abstract class IndexGateway extends Base {
     constructor(ClassName: string) {
         super(ClassName);
     }
-    @WebSocketServer() server; // 本地特定库的服务器实例
+    @WebSocketServer() server; // 本机库特定的服务器实例
+
     @SubscribeMessage('events')
     onEvent(@MessageBody() data: string, @ConnectedSocket() client: Socket): Observable<WsResponse<any>> | any {
         // 握手细节
@@ -31,7 +32,9 @@ export abstract class IndexGateway extends Base {
         //     url: /* 请求url地址 */,
         //     query: /* 询问对象 */
         //   }
-        client.emit('demo', 'hello, 这是来自 indexgateway 的后端的demo数据');
+        this.logger.log(data);
+        this.server.emit('demo', 'hello, 这是来自 indexgateway 的后端的demo数据');
+        // client.emit('demo', 'hello, 这是来自 indexgateway 的后端的demo数据');
         return of('hello, 这是来自indexgateway hello事件的数据');
     }
 }

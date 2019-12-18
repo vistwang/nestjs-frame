@@ -22,7 +22,7 @@ export class WebGateway extends IndexGateway
     constructor() {
         super(WebGateway.name);
     }
-  @WebSocketServer() server; // 本地特定库的服务器实例
+
   @SubscribeMessage('new blocks')
   onBlocks(client: any, payload: any): Observable<WsResponse<any>> | any {
     // client: socket 实例，payload: 从客户端那里得到的数据

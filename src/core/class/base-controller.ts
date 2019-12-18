@@ -1,6 +1,6 @@
 import { Base } from './base';
 
-export class BaseController extends Base {
+export abstract class BaseController extends Base {
     constructor() {
         super(BaseController.name);
     }
